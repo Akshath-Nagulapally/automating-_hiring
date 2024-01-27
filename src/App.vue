@@ -20,13 +20,14 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="container" style="padding: 50px 0 100px 0">
-    <div v-if="session">
+<div v-if="session" class="container" style="padding: 50px 0 100px 0">
+    <div>
     <Account :session="session" />
     <FileUpload :session="session" />
     <table_index :session="session" />
-  </div>
-  <Auth v-else />
+    </div>
+</div>
 
-  </div>
+  <Example v-else/>
+
 </template>

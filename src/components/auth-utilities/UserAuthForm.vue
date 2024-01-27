@@ -3,10 +3,11 @@ import { ref } from 'vue'
 //import LucideSpinner from '~icons/lucide/loader-2'
 //import GitHubLogo from '~icons/radix-icons/github-logo'
 
-import { cn } from '../lib/utils'
-import { Button } from '../lib/registry/new-york/ui/button'
-import { Input } from '../lib/registry/new-york/ui/input'
-import { Label } from '../lib/registry/new-york/ui/label'
+import { cn } from '../../lib/utils'
+import { Button } from '../../lib/registry/new-york/ui/button'
+import { Input } from '../../lib/registry/new-york/ui/input'
+import { Label } from '../../lib/registry/new-york/ui/label'
+import { supabase } from '../../supabase'
 
 const isLoading = ref(false)
 async function onSubmit(event: Event) {
@@ -17,11 +18,34 @@ async function onSubmit(event: Event) {
     isLoading.value = false
   }, 3000)
 }
+
+
+const loading = ref(false)
+const email = ref('')
+
+const handleLogin = async () => {
+  try {
+    loading.value = true
+    const { error } = await supabase.auth.signInWithOtp({
+      email: email.value,
+    })
+    if (error) throw error
+    alert('Check your email for the login link!')
+  } catch (error) {
+    if (error instanceof Error) {
+      alert(error.message)
+    }
+  } finally {
+    loading.value = false
+  }
+}
+
+
 </script>
 
 <template>
   <div :class="cn('grid gap-6', $attrs.class ?? '')">
-    <form @submit="onSubmit">
+    <form @submit.prevent="handleLogin">
       <div class="grid gap-2">
         <div class="grid gap-1">
           <Label class="sr-only" for="email">
@@ -30,16 +54,18 @@ async function onSubmit(event: Event) {
           <Input
             id="email"
             placeholder="name@example.com"
-            type="email"
+            required type="email"
             auto-capitalize="none"
             auto-complete="email"
             auto-correct="off"
             :disabled="isLoading"
+            v-model="email"
+            class="inputField"
           />
         </div>
         <Button :disabled="isLoading">
           <LucideSpinner v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
-          Sign In with Email
+          Continue with magic link
         </Button>
       </div>
     </form>
@@ -56,7 +82,7 @@ async function onSubmit(event: Event) {
     <Button variant="outline" type="button" :disabled="isLoading">
       <LucideSpinner v-if="isLoading" class="mr-2 h-4 w-4 animate-spin" />
       <GitHubLogo v-else class="mr-2 h-4 w-4" />
-      GitHub
+      Google
     </Button>
   </div>
 </template>
