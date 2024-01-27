@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
 import { onMounted, ref } from 'vue'
 import Account from './components/Account.vue'
 import Auth from './components/Auth.vue'
 import { supabase } from './supabase'
 import table_index from './components/table_index.vue'
 import FileUpload from './components/FileUpload.vue'
+import Example from './components/Example.vue'
 const session = ref()
 
 onMounted(() => {

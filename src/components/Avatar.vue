@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, toRefs, watch } from 'vue'
 import { supabase } from '../supabase'
 
