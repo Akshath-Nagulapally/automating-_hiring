@@ -3,42 +3,42 @@ import type { ColumnDef } from '@tanstack/vue-table'
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export interface Applicants {
-  id: string
-  name:string
-  skills: number
-  experience: number
-  education: number
-  custom : number
-  total: number
+  ApplicantID: string
+  FileName:string
+  SkillRating: number
+  WorkExperienceRating: number
+  EducationRating: number
+  CustomRating : number
+  TotalScore: number
 }
 
 export const columns: ColumnDef<Applicants>[] = [
   {
-    accessorKey: 'id',
+    accessorKey: 'ApplicantID',
     header: 'Id',
   },
   {
-    accessorKey: 'name',
+    accessorKey: 'FileName',
     header: 'Name',
   },
   {
-    accessorKey: 'skills',
+    accessorKey: 'SkillRating',
     header: 'Skills',
   },
   {
-    accessorKey: 'experience',
+    accessorKey: 'WorkExperienceRating',
     header: 'Experience',
   },
   {
-    accessorKey: 'education',
+    accessorKey: 'EducationRating',
     header: 'Education',
   },
   {
-    accessorKey: 'custom',
+    accessorKey: 'CustomRating',
     header: 'Custom Critera',
   },
   {
-    accessorKey: 'total',
+    accessorKey: 'TotalScore',
     header: 'Total',
   },
 ]

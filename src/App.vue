@@ -23,7 +23,7 @@ onMounted(() => {
     <div v-if="session">
     <Account :session="session" />
     <FileUpload :session="session" />
-    <table_index />
+    <table_index :session="session" />
   </div>
   <Auth v-else />
 
