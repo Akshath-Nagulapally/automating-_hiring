@@ -1,7 +1,37 @@
 <template>
-  <Input type="file" multiple @change="onFileChange" />
-  <Button @click="processFiles">Submit Files</Button>
+  <div class="file-input-container">
+    <Input type="file" multiple @change="onFileChange" class="file-input" />
+    <Button @click="processFiles" class="submit-button">Submit Files</Button>
+  </div>
 </template>
+
+<style scoped>
+.file-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Align items to the start of the flex container */
+  max-width: 600px; /* Set a max-width for the container */
+  margin: 0 auto; /* Center the container */
+  width: 100%; /* Make the container full width */
+}
+
+.file-input {
+  width: 100%; /* Make the file input full width of its parent */
+  margin-bottom: 20px; /* Add some space below the file input */
+}
+
+.submit-button {
+  position: relative; /* Position absolutely within .container */
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  left: 40%; /* Align the left edge of the button to the center of the container */
+  /* additional styles for button */
+
+}
+
+</style>
 
 <script setup lang="ts">
 import { ref } from 'vue';

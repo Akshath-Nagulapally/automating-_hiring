@@ -35,14 +35,14 @@ import { buttonVariants } from '@/components/ui/button'
         Luup.ai
       </div>
       <div class="relative z-20 mt-auto">
-        <blockquote class="space-y-2">
+        <!--<blockquote class="space-y-2">
           <p class="text-lg">
             &ldquo;This has saved me countless hours of work .&rdquo;
           </p>
           <footer class="text-sm">
             Sofia Davis
           </footer>
-        </blockquote>
+        </blockquote>-->
       </div>
     </div>
     <div class="lg:p-8">
