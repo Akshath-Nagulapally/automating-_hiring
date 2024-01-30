@@ -13,12 +13,12 @@ const session = ref()
 onMounted(() => {
   supabase.auth.getSession().then(({ data }) => {
     session.value = data.session
-    console.log(session)
+    //console.log(session)
 
   })
 
   supabase.auth.onAuthStateChange((_, _session) => {
-    console.log(session)
+    //console.log(session)
 
     //console.log(_session)
   })

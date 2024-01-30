@@ -3,7 +3,7 @@ import AvatarDynamic from './AvatarDynamic.vue'
 import Account from './Account.vue'
 import FileUpload from './FileUpload.vue'
 import table_index from './table_index.vue'
-
+import { ref } from 'vue'
 import { Button } from '@/components/ui/button'
 import AccountUpdated from './AccountUpdated.vue'
 import {
@@ -16,6 +16,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/components/ui/sheet'
+
+
+
 const props = defineProps({
   session: Object
 })
@@ -32,7 +35,7 @@ const props = defineProps({
   <Sheet>
     <SheetTrigger as-child>
       <Button variant="outline">
-        View Account Details
+        Account Details
       </Button>
     </SheetTrigger>
     <SheetContent>
@@ -63,7 +66,16 @@ const props = defineProps({
           </Button>
         </SheetClose>
       </SheetFooter>-->
+
       <AccountUpdated :session="session" />
+      <SheetFooter>
+        <SheetClose as-child>
+          <Button type="submit">
+            Close
+          </Button>
+        </SheetClose>
+      </SheetFooter>
+
     </SheetContent>
   </Sheet>
   <FileUpload :session="session" />

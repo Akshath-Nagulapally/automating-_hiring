@@ -1,7 +1,7 @@
 <template>
   <div class="file-input-container">
     <Input type="file" multiple @change="onFileChange" class="file-input" />
-    <Button @click="processFiles" class="submit-button">Submit Files</Button>
+    <Button @click="processFiles" class="submit-button">Process Resume(s)</Button>
   </div>
 </template>
 
