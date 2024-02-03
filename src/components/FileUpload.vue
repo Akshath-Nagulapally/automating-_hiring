@@ -45,8 +45,14 @@ const selectedFiles = ref<File[]>([]);
 //=========== Retrieve User session==========================================
 
 
-const props = defineProps(['session'])
-const { session } = toRefs(props)
+const props = defineProps({
+  session: Object,
+  CompartmentPropID:String
+})
+
+
+const { session, CompartmentPropID } = toRefs(props)
+
 
 //========================================================================
 
@@ -94,6 +100,7 @@ function processApiOutput(apiOutput, fileNames, userId) {
   apiOutput.forEach((candidate, candidateIndex) => {
     const update = {
       id: userId, // Assuming each candidate has a userId      
+      CompartmentID: CompartmentPropID?.value,
       updated_at: new Date(),
       FileName: fileNames[candidateIndex], // Assigning file name
       SkillRating: 0,
@@ -139,6 +146,13 @@ function processApiOutput(apiOutput, fileNames, userId) {
 }
 
 async function processFiles() {
+
+  //if the commpartment is undefined, then ask user to select a compartment to work with.
+  if (!CompartmentPropID.value?.trim()) {
+  console.log("Please select a compartment to work with.");
+  return;
+}
+
   if (selectedFiles.value.length > 0) {
     const formData = new FormData();
     const fileNames = selectedFiles.value.map(file => file.name);

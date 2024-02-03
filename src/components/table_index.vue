@@ -5,20 +5,41 @@ import type { Applicants } from './table/columns';
 import DataTable from "./table/data-table.vue"
 import { supabase } from '../supabase';
 import { toRefs } from 'vue';
+import { watch } from 'vue';
+
+
 
 const data = ref<Applicants[]>([])
 
-const props = defineProps(['session'])
-const { session } = toRefs(props)
+const props = defineProps({
+  session: Object,
+  CompartmentPropID:String
+})
+
+
+const { session, CompartmentPropID } = toRefs(props);
+
+
+watch(CompartmentPropID, async (newValue, oldValue) => {
+  console.log(`CompartmentPropID changed from ${oldValue} to ${newValue}`);
+  // Fetch new data based on the updated CompartmentPropID
+  const UpdatedData = await getData();
+  // Update the data ref with the new data to re-render the DataTable
+  data.value = UpdatedData;
+});
+
 const { user } = session.value;
 const UserID = user.id;
+
 
 async function getData(): Promise<Applicants[]> {
   let { data: ApplicantRatings, error } = await supabase
     .from('ApplicantRatings')
-    .select("ApplicantID, FileName, SkillRating, SkillEvidence, WorkExperienceRating, WorkExperienceEvidence, EducationRating, EducationEvidence, CustomRating, CustomRatingEvidence, TotalScore")
-    .eq('id', UserID)
+    .select("ApplicantID, FileName, SkillRating, SkillEvidence, WorkExperienceRating, WorkExperienceEvidence, EducationRating, EducationEvidence, CustomRating, CustomRatingEvidence, TotalScore, CompartmentID")
+    .match({'id': UserID, 'CompartmentID': CompartmentPropID.value})
     .order('TotalScore', { ascending: false });
+
+    console.log("change detected:", ApplicantRatings)
 
   return ApplicantRatings || [];
 }

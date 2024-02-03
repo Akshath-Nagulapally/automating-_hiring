@@ -50,7 +50,7 @@ const table = useVueTable({
                 <template v-else>
                     <TableRow>
                         <TableCell :colSpan="columns.length" class="h-24 text-center">
-                            No results.
+                            No results, try clicking or creating a compartment and loading in files.
                         </TableCell>
                     </TableRow>
                 </template>
