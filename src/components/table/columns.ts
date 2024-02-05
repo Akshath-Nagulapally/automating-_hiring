@@ -13,30 +13,30 @@ export interface Applicants {
 }
 
 export const columns: ColumnDef<Applicants>[] = [
-  {
-    accessorKey: 'ApplicantID',
-    header: 'Id',
-  },
+  // {
+  //   accessorKey: 'ApplicantID',
+  //   header: 'Id',
+  // },
   {
     accessorKey: 'FileName',
     header: 'Name',
   },
-  {
-    accessorKey: 'SkillRating',
-    header: 'Skills',
-  },
-  {
-    accessorKey: 'WorkExperienceRating',
-    header: 'Experience',
-  },
-  {
-    accessorKey: 'EducationRating',
-    header: 'Education',
-  },
-  {
-    accessorKey: 'CustomRating',
-    header: 'Custom Critera',
-  },
+  // {
+  //   accessorKey: 'SkillRating',
+  //   header: 'Skills',
+  // },
+  // {
+  //   accessorKey: 'WorkExperienceRating',
+  //   header: 'Experience',
+  // },
+  // {
+  //   accessorKey: 'EducationRating',
+  //   header: 'Education',
+  // },
+  // {
+  //   accessorKey: 'CustomRating',
+  //   header: 'Custom Critera',
+  // },
   {
     accessorKey: 'TotalScore',
     header: 'Total',

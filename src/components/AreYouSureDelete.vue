@@ -10,9 +10,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { supabase } from '../supabase'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 
 const props=defineProps({
     compartmentname:String,
@@ -46,9 +45,10 @@ async function DeleteCompartment(UserID: String, CompartmentID: String) {
 <template>
   <Dialog>
     <DialogTrigger>
-      <Button variant="outline">
-        Delete compartment
-      </Button>
+    <Avatar class="w-3 h-3">
+      <AvatarImage src="https://png.pngtree.com/png-vector/20190326/ourmid/pngtree-vector-trash-icon-png-image_865253.jpg" alt="@radix-vue"/>
+      <AvatarFallback>CN</AvatarFallback>
+    </Avatar>
     </DialogTrigger>
     <DialogContent class="sm:max-w-[425px]">
       <DialogHeader>

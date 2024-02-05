@@ -1,5 +1,5 @@
 import { readFile, readdir } from 'node:fs/promises'
-import { join, normalize, resolve } from 'pathe'
+import { join, normalize, resolve } from 'path'
 import { compileScript, parse } from 'vue/compiler-sfc'
 
 import type { Registry } from '../../lib/registry'

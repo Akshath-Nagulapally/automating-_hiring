@@ -3,14 +3,11 @@ import { ScrollAreaRoot, ScrollAreaScrollbar, ScrollAreaThumb, ScrollAreaViewpor
 import { Button } from '@/components/ui/button'
 import { supabase } from '../supabase'
 import { onMounted, ref, toRefs } from 'vue'
-import table_index from './table_index.vue'
-import { provide } from 'vue';
-import FileUpload from './FileUpload.vue'
+import AccountEditPopup from './AccountEditPopup.vue'
 
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogClose,
   DialogHeader,
@@ -34,13 +31,26 @@ onMounted(async () => {
   await fetchFolders();
 });
 
-// Append two sample folders to the array
 
 console.log(HiringAutomation);
 
 
 const FolderName = ref('')
 
+//fetching the copartmentPropID from pinia store:
+
+import { useCompartmentStore } from './stores/CompartmentStore';
+
+const compartmentStore = useCompartmentStore();
+
+// To access CompartmentPropID
+const CompartmentPropIDPinia = compartmentStore.CompartmentPropID;
+
+// To update CompartmentPropID
+function FunctionToUpdateIDInPiniaStore(newID: string) {
+  compartmentStore.updateCompartmentPropID(newID);
+}
+// Done with fetching
 
 async function UpdateCompartmentPropID(propid){
   CompartmentPropID.value=propid
@@ -100,13 +110,8 @@ async function fetchFolders() {
 
 <template>
 
-<FileUpload :session="session" :CompartmentPropID="CompartmentPropID"/>
-
-
-
-
   <ScrollAreaRoot
-    class="w-[200px] h-400 rounded overflow-hidden shadow-[0_2px_10px] shadow-blackA7 bg-white"
+    class="w-[200px] h-[100%] rounded overflow-hidden shadow-[0_2px_10px] shadow-blackA7 bg-white"
     style="--scrollbar-size: 10px"
   >
     <ScrollAreaViewport class="w-full h-full rounded">
@@ -121,10 +126,7 @@ async function fetchFolders() {
     </DialogTrigger>
     <DialogContent class="sm:max-w-[425px]">
       <DialogHeader>
-        <DialogTitle>Name your automation</DialogTitle>
-        <DialogDescription>
-            (what is the job role these resumes are meant for)
-        </DialogDescription>
+        <DialogTitle>Job Name</DialogTitle>
       </DialogHeader>
       <div class="grid gap-4 py-4">
         <div class="grid grid-cols-4 items-center gap-4">
@@ -138,7 +140,7 @@ async function fetchFolders() {
 
         <DialogClose as-child>
             <Button type="submit" @click="updateProfile">
-          Create Automation
+          Create
         </Button>
         </DialogClose>        
       </DialogFooter>
@@ -151,7 +153,7 @@ async function fetchFolders() {
           class="text-mauve12 text-[13px] leading-[18px] mt-2.5 pt-2.5 border-t border-t-mauve6"
         >
 
-        <Button variant="link" @click="UpdateCompartmentPropID(AutomationName.CompartmentID)">
+        <Button variant="link" @click="FunctionToUpdateIDInPiniaStore(AutomationName.CompartmentID)">
           {{ AutomationName.CompartmentName }}
 
         </Button>
@@ -159,6 +161,11 @@ async function fetchFolders() {
         <AreYouSureDelete :compartmentname="AutomationName.CompartmentName" :compartmentid="AutomationName.CompartmentID" :userid="user.id"  />
 
         
+        </div>
+        <div>
+
+          <AccountEditPopup :session="session" />
+
         </div>
       </div>
     </ScrollAreaViewport>
@@ -180,6 +187,6 @@ async function fetchFolders() {
     </ScrollAreaScrollbar>
   </ScrollAreaRoot>
 
-  <table_index :session="session" :CompartmentPropID="CompartmentPropID"/>
+  <!--<table_index :session="session" />-->
 
 </template>

@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import UserAuthForm from './auth-utilities/UserAuthForm.vue'
-import { cn } from '@/lib/utils'
-import { buttonVariants } from '@/components/ui/button'
 </script>
 
 <template>

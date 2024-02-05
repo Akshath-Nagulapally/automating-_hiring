@@ -14,6 +14,25 @@ import {
     TableHeader,
     TableRow,
 } from "@/components/ui/table"
+import { toRaw } from 'vue'
+//Making the row State public (Start)
+
+
+import { useSelectedRowState } from '../stores/SelectedRowState';
+
+const UserSelectedRow = useSelectedRowState();
+
+// To access CompartmentPropID
+const SelectedRowVar = UserSelectedRow.RowState;
+
+const logRowData = (rowData) => {
+    const RowDataRaw =toRaw(rowData)
+    console.log("logdata is running", RowDataRaw);
+    UserSelectedRow.updateRowState(RowDataRaw);
+    console.log("Row state has been updated to this:", UserSelectedRow.RowState)
+}
+
+//Making the row state public(end)
 
 const props = defineProps<{
     columns: ColumnDef<TData, TValue>[]
@@ -25,6 +44,8 @@ const table = useVueTable({
     get columns() { return props.columns },
     getCoreRowModel: getCoreRowModel(),
 })
+
+
 </script>
 
 <template>
@@ -41,7 +62,7 @@ const table = useVueTable({
             <TableBody>
                 <template v-if="table.getRowModel().rows?.length">
                     <TableRow v-for="row in table.getRowModel().rows" :key="row.id"
-                        :data-state="row.getIsSelected() ? 'selected' : undefined">
+                        :data-state="row.getIsSelected() ? 'selected' : undefined" @click="logRowData(row.original)">
                         <TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
                             <FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
                         </TableCell>

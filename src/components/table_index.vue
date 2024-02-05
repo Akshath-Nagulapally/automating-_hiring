@@ -6,6 +6,24 @@ import DataTable from "./table/data-table.vue"
 import { supabase } from '../supabase';
 import { toRefs } from 'vue';
 import { watch } from 'vue';
+import { storeToRefs } from 'pinia'
+
+
+//Get the prop from pinia store
+
+
+import { useCompartmentStore } from './stores/CompartmentStore';
+
+const compartmentStore = useCompartmentStore();
+
+// To access CompartmentPropID
+
+
+const { CompartmentPropID } = storeToRefs(compartmentStore)
+console.log("loaded shit,", CompartmentPropID)
+
+
+//End of pinia store prop stuff
 
 
 
@@ -13,19 +31,18 @@ const data = ref<Applicants[]>([])
 
 const props = defineProps({
   session: Object,
-  CompartmentPropID:String
 })
 
 
-const { session, CompartmentPropID } = toRefs(props);
+const { session } = toRefs(props);
 
 
 watch(CompartmentPropID, async (newValue, oldValue) => {
   console.log(`CompartmentPropID changed from ${oldValue} to ${newValue}`);
   // Fetch new data based on the updated CompartmentPropID
-  const UpdatedData = await getData();
+  const newData = await getData();
   // Update the data ref with the new data to re-render the DataTable
-  data.value = UpdatedData;
+  data.value = newData;
 });
 
 const { user } = session.value;
@@ -33,13 +50,14 @@ const UserID = user.id;
 
 
 async function getData(): Promise<Applicants[]> {
+
   let { data: ApplicantRatings, error } = await supabase
     .from('ApplicantRatings')
     .select("ApplicantID, FileName, SkillRating, SkillEvidence, WorkExperienceRating, WorkExperienceEvidence, EducationRating, EducationEvidence, CustomRating, CustomRatingEvidence, TotalScore, CompartmentID")
     .match({'id': UserID, 'CompartmentID': CompartmentPropID.value})
     .order('TotalScore', { ascending: false });
 
-    console.log("change detected:", ApplicantRatings)
+    console.log("change detected:", ApplicantRatings, "prop id:", CompartmentPropID.value)
 
   return ApplicantRatings || [];
 }

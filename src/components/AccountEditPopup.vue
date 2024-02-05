@@ -3,13 +3,9 @@ import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { supabase } from '../supabase'
@@ -100,9 +96,9 @@ async function signOut() {
       <div class="flex justify-end">
     <Avatar>
       <AvatarRoot>
-      <AvatarFallback class="text-grass11 leading-1 flex h-full w-full items-center justify-center bg-white text-[15px] font-medium">
-        A
-      </AvatarFallback>
+        <AvatarFallback class="text-grass11 leading-1 flex h-[100px] w-[100px] items-center justify-center bg-white text-[20px] font-bold shadow-outline dark">
+          A
+        </AvatarFallback>
     </AvatarRoot>
     </Avatar>
 </div>

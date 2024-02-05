@@ -2,10 +2,10 @@
 <template>
     <div class="my-sidebar">
       <!-- AccountEditPopup Component -->
-      <AccountEditPopup :session="session" />
       <!-- ScrollableSidebar Component -->
       <ScrollableSidebar :session="session" />
-      <!-- Any additional components or content here -->
+      <AccountEditPopup :session="session" />
+
     </div>
   </template>
   
@@ -24,7 +24,6 @@
   <style scoped>
   .my-sidebar {
     /* Sidebar styles */
-    width: 250px; /* Adjust the width as needed */
     height: 100%; /* Full height */
     position: fixed; /* Fixed Sidebar (stay in place on scroll) */
     left: 0;

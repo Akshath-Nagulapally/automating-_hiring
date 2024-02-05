@@ -1,12 +1,8 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import Account from './components/Account.vue'
 import { supabase } from './supabase'
-import table_index from './components/table_index.vue'
-import FileUpload from './components/FileUpload.vue'
 import Auth_page from './components/Auth_page.vue'
 //import AdvancedTable from './AdvancedTable/AdvancedTableComponent.vue'
-import AvatarDynamic from './components/AvatarDynamic.vue'
 import index from './components/index.vue'
 const session = ref()
 

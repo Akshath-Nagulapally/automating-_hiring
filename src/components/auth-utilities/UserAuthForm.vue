@@ -10,14 +10,14 @@ import { Label } from '../../lib/registry/new-york/ui/label'
 import { supabase } from '../../supabase'
 
 const isLoading = ref(false)
-async function onSubmit(event: Event) {
-  event.preventDefault()
-  isLoading.value = true
+// async function onSubmit(event: Event) {
+//   event.preventDefault()
+//   isLoading.value = true
 
-  setTimeout(() => {
-    isLoading.value = false
-  }, 3000)
-}
+//   setTimeout(() => {
+//     isLoading.value = false
+//   }, 3000)
+// }
 
 
 const loading = ref(false)
@@ -40,16 +40,12 @@ const handleLogin = async () => {
   }
 }
 
-async function handleSignInWithGoogle(response) {
-  const { data, error } = await supabase.auth.signInWithIdToken({
-    provider: 'google',
-    token: response.credential
-  })
-}
-
-
-
-
+// async function handleSignInWithGoogle(response) {
+//   const { data, error } = await supabase.auth.signInWithIdToken({
+//     provider: 'google',
+//     token: response.credential
+//   })
+// }
 
 </script>
 

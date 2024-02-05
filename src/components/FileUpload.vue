@@ -1,5 +1,7 @@
 <template>
   <div class="file-input-container">
+    <div v-if="CompartmentPropID"></div>
+    <div v-else>Click/Create a new job role to get started</div>
     <Input type="file" multiple @change="onFileChange" class="file-input" />
     <Button @click="processFiles" class="submit-button">Process Resume(s)</Button>
   </div>
@@ -39,6 +41,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { supabase } from '../supabase';
 import { toRefs } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useCompartmentStore } from './stores/CompartmentStore';
 
 const selectedFiles = ref<File[]>([]);
 
@@ -47,14 +51,26 @@ const selectedFiles = ref<File[]>([]);
 
 const props = defineProps({
   session: Object,
-  CompartmentPropID:String
 })
 
 
-const { session, CompartmentPropID } = toRefs(props)
+const { session} = toRefs(props)
 
 
 //========================================================================
+
+
+//Pinia Store:
+
+
+const compartmentStore = useCompartmentStore();
+
+// To access CompartmentPropID
+
+
+const { CompartmentPropID } = storeToRefs(compartmentStore)
+console.log("loaded shit,", CompartmentPropID)
+
 
 
 
